@@ -21,7 +21,8 @@ package oqube.lags
 /*
  * needed imports for specs
  */
-import org.specs.runner.JUnit4
+import org.junit.runner.RunWith
+import org.specs.runner.{ JUnitSuiteRunner, JUnit } 
 import org.specs._
 import request._
 import naive._
@@ -35,7 +36,7 @@ import org.scalacheck.Gen._
 /**
  * Specification of LAGS problem.
  */
-object LagsSpecification extends Specification {
+object LagsSpecification extends Specification with JUnit {  
   
   "a reservation request" should {
 
@@ -162,7 +163,8 @@ object LagsSpecification extends Specification {
   }
 }
 
-object LagsObjectSpecification extends Specification with ScalaCheck{
+@RunWith(classOf[JUnitSuiteRunner])
+class LagsObjectSpecTest extends Specification with JUnit with ScalaCheck{
 
   "a more efficient scheduling algorithm".isSpecifiedBy(LagsSpecification)
 
@@ -271,12 +273,4 @@ object LagsObjectSpecification extends Specification with ScalaCheck{
     
   }
 }
-  
 
-
-/**
- * Tests pour le projet LAGS.
- * @author abailly@oqube.com
- * @version $Rev$
- */
-class LagsTest extends JUnit4(LagsObjectSpecification) 
